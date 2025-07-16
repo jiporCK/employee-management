@@ -63,6 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public boolean deleteEmployeeById(String id) {
-        return false;
+        return repository.getEmployees()
+                .removeIf(employee -> employee.getId().equals(id));
     }
+
 }
