@@ -27,22 +27,38 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         repository.getEmployees().add(employee);
 
-        return null;
+        return employeeMapper.toResponse(employee);
     }
 
     @Override
     public List<EmployeeResponse> getAllEmployees() {
-        return List.of();
+        return employeeMapper.toReponseList(repository.getEmployees());
     }
 
     @Override
     public Optional<EmployeeResponse> getEmployeeById(String id) {
-        return Optional.empty();
+        return repository.getEmployees().stream()
+                .filter(employee -> employee.getId().equals(id))
+                .map(employee -> EmployeeResponse.builder()
+                        .id(employee.getId())
+                        .name(employee.getName())
+                        .email(employee.getEmail())
+                        .salary(employee.getSalary())
+                        .build())
+                .findFirst();
     }
 
     @Override
     public Optional<EmployeeResponse> updateById(String id, EmployeeRequest request) {
-        return Optional.empty();
+        return repository.getEmployees().stream()
+                .filter(employee -> employee.getId().equals(id))
+                .map(employee -> {
+                    employee.setName(request.name());
+                    employee.setEmail(request.email());
+                    employee.setSalary(request.salary());
+                    return employeeMapper.toResponse(employee);
+                })
+                .findFirst();
     }
 
     @Override
