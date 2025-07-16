@@ -1,5 +1,6 @@
 package employeeManagement.mapper;
 
+import employeeManagement.dto.EmployeeRequest;
 import employeeManagement.dto.EmployeeResponse;
 import employeeManagement.model.Employee;
 
@@ -26,6 +27,14 @@ public class EmployeeMapper {
                         .build()
                 )
                 .toList();
+    }
+
+    public Employee fromRequest(EmployeeRequest request) {
+        return new Employee(
+                request.name(),
+                request.email(),
+                request.salary()
+        );
     }
 
 }
