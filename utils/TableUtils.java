@@ -33,21 +33,21 @@ public class TableUtils {
         return table.render();
     }
 
-    public String renderEmployee(Employee employee) {
+    public String renderEmployee(EmployeeResponse employee) {
         Table table = new Table(
                 2,
                 BorderStyle.HEAVY_TOP_AND_BOTTOM
         );
 
-        table.addCell("   Employee Details   ");
+//        table.addCell("   Employee Details   ", );
         table.addCell("   ID   ");
-        table.addCell(employee.getId());
+        table.addCell(employee.id());
         table.addCell("   Name   ");
-        table.addCell(employee.getName());
+        table.addCell(employee.name());
         table.addCell("   Email   ");
-        table.addCell(employee.getEmail());
+        table.addCell(employee.email());
         table.addCell("   Salary   ");
-        table.addCell(employee.getSalary().toString());
+        table.addCell(employee.salary().toString());
 
         return table.render();
     }
